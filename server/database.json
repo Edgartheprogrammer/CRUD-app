@@ -24,7 +24,7 @@
       "id": "3",
       "name": "The Witcher 3: Wild Hunt",
       "genre": "Action RPG",
-      "platform": "PlayStation 4, Xbox One, Nintendo Switch",
+      "platform": "PlayStation, Xbox One, Nintendo Switch",
       "release_date": "May 19, 2015",
       "price": 39.99,
       "image": "https://example.com/botw-cover.jpg",
@@ -33,7 +33,7 @@
     {
       "name": "Red Dead Redemption 2",
       "genre": "Action-adventure",
-      "platform": "PlayStation 4, Xbox One",
+      "platform": "PlayStation, Xbox One",
       "release_date": "October 26, 2018",
       "price": 59.98,
       "image": "https://example.com/botw-cover.jpg",

@@ -3,11 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Document</title>
+    
 </head>
 <body>
+
     <button id="loadContent" onclick="getGames()">click to open</button>
+
+    <section class="section-edit">
+        <h2>Search</h2>
+
+        <input id="Id" placeholder="Enter Id">
+        <input id="Name" placeholder="Enter Name">
+        <input id="Genre" placeholder="Enter Genre">
+        <input id="ReleaseDate" type="date" max="2025-12-31" placeholder="Enter Release Date">
+        
+        <fieldset>
+    <legend>Choose consoles:</legend>
+    <label><input type="checkbox" name="console" value="nintendo"> Nintendo</label><br>
+    <label><input type="checkbox" name="console" value="playstation"> PlayStation</label><br>
+    <label><input type="checkbox" name="console" value="xbox"> Xbox</label><br>
+        </fieldset>
+    
+<input id="Price" type="number" step="0.01" placeholder="Enter Price" >
+
+<button id="search" onclick="searchGame()">Search Game</button>
+
+
+</section>
+    
+    
+            
+        
+        
+
+
+    <section class="section-table">
+        <table id="gameTable">
+
+        </table>
+    </section>
     
     <script src="./src/script/services.js"></script>
 </body>

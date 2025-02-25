@@ -37,16 +37,24 @@ async function getAllGames() {
 }
 // getAllGames();
 
-async function getGame(id) {
+async function getGame(searchcriteria) {
     try {
-        let response = await fetch(`http://localhost:3000/video-games/${id}`);
-        let game = await response.json();
-        console.log("Game", game);
-        return game;
+        const games = await getAllGames();
+        const filteredGames = games.filter(game => {
+            return Object.keys(searchcriteria).every(key => {
+                if (typeof game[key] === 'string' && typeof searchcriteria [key] === 'string') {
+                    return game [key] .toLowerCase() .includes(searchcriteria [key] .toLocaleLowerCase)
+                }
+                return game [key] == searchcriteria[key]
+            })
+        }); console.log(filteredGames)
+        return filteredGames
     } catch (error) {
         console.log("Error getting game", error);
+        return []
     }
 }
+
 // getGame(1)
 
 
@@ -94,3 +102,4 @@ let updateGame = {
   }
     
   editGame(id, updateGame);
+

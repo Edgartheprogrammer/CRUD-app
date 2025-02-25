@@ -49,16 +49,6 @@
       "price": 59.99,
       "image": "https://example.com/botw-cover.jpg",
       "sound": "https://example.com/botw-theme.mp3"
-    },
-    {
-      "id": "1d2e",
-      "name": "The Legend of Zelda: Breath of the Wild",
-      "genre": "Action-adventure",
-      "platform": "Nintendo Switch",
-      "release_date": "March 3, 2017",
-      "price": 59.99,
-      "image": "https://example.com/botw-cover.jpg",
-      "sound": "https://example.com/botw-theme.mp3"
     }
   ]
 }

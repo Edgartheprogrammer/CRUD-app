@@ -21,7 +21,7 @@ let game = {
   image: "https://example.com/botw-cover.jpg",
   sound: "https://example.com/botw-theme.mp3",
 };
-addGame(game);
+// addGame(game);
 
 
 async function getGames() {
@@ -52,7 +52,8 @@ async function getGame(id) {
 
 async function deleteGame(id) {
     try {
-        let response = await fetch(`http://localhost:3000/video-games/${id}`, {
+        let encodedId = encodeURIComponent(id);
+        let response = await fetch(`http://localhost:3000/video-games/${encodedId}`, {
             method: "DELETE"
         }); console.log("Game deleted", response);
         
@@ -60,4 +61,6 @@ async function deleteGame(id) {
         console.log("Error deleting game", error);
     }
 }
-// deleteGame("d186")
+
+let myGame = "1d2e";
+deleteGame(myGame)

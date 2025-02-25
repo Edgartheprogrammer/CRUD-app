@@ -24,7 +24,7 @@ let game = {
 // addGame(game);
 
 
-async function getGames() {
+async function getAllGames() {
     try {
         let response = await fetch("http://localhost:3000/video-games");
         let games = await response.json();
@@ -35,7 +35,7 @@ async function getGames() {
         console.log("Error getting games", error);
     }
 }
-// getGames();
+// getAllGames();
 
 async function getGame(id) {
     try {
@@ -63,4 +63,34 @@ async function deleteGame(id) {
 }
 
 let myGame = "1d2e";
-deleteGame(myGame)
+// deleteGame(myGame)
+
+async function editGame(id, updateData) {
+    try {
+        let encodedId = encodeURIComponent(id);
+        let response = await fetch(`http://localhost:3000/video-games/${encodedId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updateData) });
+        
+        let game = await response.json();
+        console.log("Game", game);
+    } catch (error) {
+        console.log("Error editing game", error);
+    }
+}
+let id = "4"
+
+let updateGame = {
+    name: "Red Dead Redemption 2",
+    genre: "Action-adventure",
+    platform: "PlayStation 4, Xbox One",
+    release_date: "October 26, 2018",
+    price: 59.98,
+    image: "https://example.com/botw-cover.jpg",
+    sound: "https://example.com/botw-theme.mp3"
+  }
+    
+  editGame(id, updateGame);

@@ -31,14 +31,14 @@
       "sound": "https://example.com/botw-theme.mp3"
     },
     {
-      "id": "4",
       "name": "Red Dead Redemption 2",
       "genre": "Action-adventure",
       "platform": "PlayStation 4, Xbox One",
       "release_date": "October 26, 2018",
-      "price": 59.99,
+      "price": 59.98,
       "image": "https://example.com/botw-cover.jpg",
-      "sound": "https://example.com/botw-theme.mp3"
+      "sound": "https://example.com/botw-theme.mp3",
+      "id": "4"
     },
     {
       "id": "d186",

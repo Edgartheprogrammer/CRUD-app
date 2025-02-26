@@ -43,10 +43,10 @@ export async function getGame(searchcriteria) {
         const games = await getAllGames();
         const filteredGames = games.filter(game => {
             return Object.keys(searchcriteria).every(key => {
-                if (typeof game[key] === 'string' && typeof searchcriteria [key] === 'string') {
-                    return game [key] .toLowerCase() .includes(searchcriteria [key] .toLocaleLowerCase)
+                if (typeof game[key] === 'string' && typeof searchcriteria[key] === 'string') {
+                    return game [key].toLowerCase().includes(searchcriteria [key].toLocaleLowerCase)
                 }
-                return game [key] == searchcriteria[key]
+                return game[key] == searchcriteria[key]
             })
         }); console.log(filteredGames)
         return filteredGames

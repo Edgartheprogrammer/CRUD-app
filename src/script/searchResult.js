@@ -1,83 +1,108 @@
 // searchResult.js
+function getFormValue(id) {
+  return document.getElementById(id).value;
+}
 
 function getSearchCriteria() {
   return {
-    id: document.getElementById('Id').value,
-    name: document.getElementById('Name').value,
-    genre: document.getElementById('Genre').value,
-    release_date: document.getElementById('ReleaseDate').value,
-    price: document.getElementById('Price').value,
+    id: getFormValue('Id'),
+    name: getFormValue('Name'),
+    genre: getFormValue('Genre'),
+    release_date: getFormValue('ReleaseDate'),
+    price: getFormValue('Price')
   };
+}
+
+function updateElementContent(id, content) {
+  document.getElementById(id).innerHTML = content;
+}
+
+function clearSearchResults() {
+  updateElementContent('searchResults', '');
+  console.log('Clearing search results...');
+}
+
+function displayNoResultsMessage() {
+  updateElementContent('searchResults', '<div>No matching game found.</div>');
+}
+
+function clearFields() {
+  document.querySelector('form').reset();
+  clearSearchResults();
+}
+
+function populateFormFields(game) {
+  clearSearchResults();
+  clearFields();
+  
+  ['Id', 'Name', 'Genre', 'ReleaseDate', 'Price'].forEach(field => {
+    const key = field === 'ReleaseDate' ? 'release_date' : field.toLowerCase();
+    document.getElementById(field).value = game[key];
+  });
+  
+  const formElement = document.getElementById('editForm');
+  const saveButton = document.createElement('button');
+  saveButton.textContent = 'Save Changes';
+  saveButton.id = 'saveEditButton';
+  formElement.appendChild(saveButton);
 }
 
 function displaySearchResults(games) {
   const searchResultsDiv = document.getElementById('searchResults');
-  games.forEach(game => {
-    const resultDiv = document.createElement('div');
+  games.forEach((game) => {
+    const resultDiv = document.createElement('button');
     resultDiv.textContent = `${game.id} ${game.name} (${game.genre})`;
     resultDiv.addEventListener('click', () => populateFormFields(game));
     searchResultsDiv.appendChild(resultDiv);
   });
 }
 
-function populateFormFields(game) {
-  document.getElementById('Id').value = game.id;
-  document.getElementById('Name').value = game.name;
-  document.getElementById('Genre').value = game.genre;
-  document.getElementById('ReleaseDate').value = game.release_date;
-  document.getElementById('Price').value = game.price;
-}
-
-function clearSearchResults() {
-  const searchResultsDiv = document.getElementById('searchResults');
-  console.log("Clearing search results...");
-  searchResultsDiv.innerHTML = '';
-}
-
-function displayNoResultsMessage() {
-  const searchResultsDiv = document.getElementById('searchResults');
-  searchResultsDiv.innerHTML = '<div>No matching game found.</div>';
-}
-
-function clearFields() {
-    document.querySelector('form') = '';
-}
-
-async function searchGames() {
+async function searchGames(event) {
+  if (event) event.preventDefault();
   try {
-    const searchcriteria = getSearchCriteria();
-    const games = await getGame(searchcriteria);
+    const games = await getGame(getSearchCriteria());
     clearSearchResults();
-
+    
     if (games.length === 0) {
       console.log('No matching game found.');
       displayNoResultsMessage();
       return;
     }
-
-     if (games.length === 1) {
-      const game = games[0];
-      populateFormFields(game);
-      return;
-    }
-
-    displaySearchResults(games);
+    
+    games.length === 1 ? populateFormFields(games[0]) : displaySearchResults(games);
   } catch (error) {
     console.log('Error. Unable to display search result: ', error);
   }
 }
 
-document.getElementById('searchButton').addEventListener('click', function(event) {
+async function updateGame(event) {
+  if (event) event.preventDefault();
+  try {
+    const id = getFormValue('Id');
+    const updateData = getSearchCriteria();
+    await editGame(id, updateData);
+  } catch (error) {
+    console.log('Error. Unable to update game fields: ', error);
+  }
+}
+
+document
+  .getElementById('searchButton')
+  .addEventListener('click', function (event) {
     event.preventDefault();
     searchGames();
-});
+  });
 
-document.getElementById('clearButton').addEventListener('click', function(event) {
+document
+  .getElementById('clearButton')
+  .addEventListener('click', function (event) {
     event.preventDefault();
     clearFields();
-});
+  });
 
-// document.getElementById('saveEditButton').addEventListener('click', function(event) {
-//     event.preventDefault();
-//     editGame();
-// });
+document
+  .getElementById('editForm')
+  .addEventListener('click', function (event) {
+    event.preventDefault();
+    editGame();
+  });

@@ -27,7 +27,7 @@ async function getAllGames() {
 }
 
 /* ------------------------- GET 1 GAME ------------------------- */
-async function getGame(searchCriteria) {
+async function getGame(searchCriteria) {    
     try {
         const games = await getAllGames();
         const filteredGames = games.filter(game => {
@@ -40,7 +40,6 @@ async function getGame(searchCriteria) {
                 return game[key] == searchCriteria[key]
             })
         });
-        console.log(filteredGames);
         return filteredGames;
     } catch (error) {
         console.log("Error getting game", error);
@@ -54,7 +53,7 @@ async function deleteGame(id) {
         let encodedId = encodeURIComponent(id);
         let response = await fetch(`http://localhost:3000/video-games/${encodedId}`, {
             method: "DELETE"
-        }); console.log("Game deleted", response);
+        });
         
     } catch (error) {
         console.log("Error deleting game", error);
@@ -73,7 +72,6 @@ async function editGame(id, updatedData) {
             body: JSON.stringify(updatedData) });
         
         let game = await response.json();
-        console.log("Game", game);
     } catch (error) {
         console.log("Error editing game", error);
     }

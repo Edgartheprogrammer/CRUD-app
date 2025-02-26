@@ -28,19 +28,24 @@ function populateFormFields(game) {
   document.getElementById('Genre').value = game.genre;
   document.getElementById('ReleaseDate').value = game.release_date;
   document.getElementById('Price').value = game.price;
-  if (!document.getElementById('saveEditButton')) {
-    const formElement = document.getElementById('editForm');
-    const saveButton = document.createElement('button');
-    saveButton.textContent = 'Save Changes';
-    saveButton.id = 'saveEditButton';
-    formElement.appendChild(saveButton);
-    saveButton.addEventListener('click', function (event) {
-      event.preventDefault();
-      updateGame();
-      formElement.removeChild(saveButton);
-      clearFields();
-    });
+
+  const existingSaveButton = document.getElementById('saveEditButton');
+  if (existingSaveButton) {
+    existingSaveButton.remove();
   }
+
+  const formElement = document.getElementById('editForm');
+  const saveButton = document.createElement('button');
+  saveButton.textContent = 'Save Changes';
+  saveButton.id = 'saveEditButton';
+  formElement.appendChild(saveButton);
+
+  saveButton.addEventListener('click', async function(event) {
+    event.preventDefault();
+    await updateGame();
+    saveButton.remove();
+    clearFields();
+  });
 }
 
 function clearSearchResults() {
@@ -57,6 +62,11 @@ function displayNoResultsMessage() {
 function clearFields() {
   document.querySelector('form').reset();
   clearSearchResults();
+
+  const saveButton = document.getElementById('saveEditButton');
+  if (saveButton) {
+    saveButton.remove();
+  }
 }
 
 async function searchGames() {

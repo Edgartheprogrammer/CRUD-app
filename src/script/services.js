@@ -1,3 +1,4 @@
+/* ------------------------- ADD A GAME------------------------- */
 async function addGame(game) {
   try {
     let response = await fetch("http://localhost:3000/video-games", {
@@ -12,7 +13,6 @@ async function addGame(game) {
   }
 }
 let game = {
-    
   name: "The Legend of Zelda: Breath of the Wild",
   genre: "Action-adventure",
   platform: "Nintendo Switch",
@@ -23,7 +23,7 @@ let game = {
 };
 // addGame(game);
 
-
+/* ------------------------- GET ALL GAMES ------------------------- */
 async function getAllGames() {
     try {
         let response = await fetch("http://localhost:3000/video-games");
@@ -37,7 +37,8 @@ async function getAllGames() {
 }
 // getAllGames();
 
-async function getGame(searchcriteria) {
+/* ------------------------- GET 1 GAME ------------------------- */
+export async function getGame(searchcriteria) {
     try {
         const games = await getAllGames();
         const filteredGames = games.filter(game => {
@@ -54,10 +55,9 @@ async function getGame(searchcriteria) {
         return []
     }
 }
-
 // getGame(1)
 
-
+/* ------------------------- DELETE A GAME ------------------------- */
 async function deleteGame(id) {
     try {
         let encodedId = encodeURIComponent(id);
@@ -69,11 +69,11 @@ async function deleteGame(id) {
         console.log("Error deleting game", error);
     }
 }
-
 let myGame = "1d2e";
 // deleteGame(myGame)
 
-async function editGame(id, updateData) {
+/* ------------------------- EDIT A GAME ------------------------- */
+export async function editGame(id, updateData) {
     try {
         let encodedId = encodeURIComponent(id);
         let response = await fetch(`http://localhost:3000/video-games/${encodedId}`, {
@@ -101,5 +101,7 @@ let updateGame = {
     sound: "https://example.com/botw-theme.mp3"
   }
     
-  editGame(id, updateGame);
+// editGame(id, updateGame);
+
+/* ------------------------- END OF ------------------------- */
 

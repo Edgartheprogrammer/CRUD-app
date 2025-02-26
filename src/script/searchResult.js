@@ -28,11 +28,19 @@ function populateFormFields(game) {
   document.getElementById('Genre').value = game.genre;
   document.getElementById('ReleaseDate').value = game.release_date;
   document.getElementById('Price').value = game.price;
-  const formElement = document.getElementById('editForm');
-  const saveButton = document.createElement('button');
-  saveButton.textContent = `Save Changes`;
-  saveButton.id = 'saveEditButton';
-  formElement.appendChild(saveButton);
+  if (!document.getElementById('saveEditButton')) {
+    const formElement = document.getElementById('editForm');
+    const saveButton = document.createElement('button');
+    saveButton.textContent = 'Save Changes';
+    saveButton.id = 'saveEditButton';
+    formElement.appendChild(saveButton);
+    saveButton.addEventListener('click', function (event) {
+      event.preventDefault();
+      updateGame();
+      formElement.removeChild(saveButton);
+      clearFields();
+    });
+  }
 }
 
 function clearSearchResults() {
@@ -75,22 +83,6 @@ async function searchGames() {
   }
 }
 
-async function updateGame() {
-  try {
-    let id = document.getElementById('Id').value;
-    let updatedData = {
-      id: document.getElementById('Id').value,
-      name: document.getElementById('Name').value,
-      genre: document.getElementById('Genre').value,
-      release_date: document.getElementById('ReleaseDate').value,
-      price: document.getElementById('Price').value,
-    };
-    editGame(id, updatedData);
-  } catch (error) {
-    console.log('Error. Unable to update game fields: ', error);
-  }
-}
-
 document
   .getElementById('searchButton')
   .addEventListener('click', function (event) {
@@ -103,10 +95,4 @@ document
   .addEventListener('click', function (event) {
     event.preventDefault();
     clearFields();
-  });
-
-document
-  .getElementById('editForm').addEventListener('click', function (event) {
-    event.preventDefault();
-    editGame();
   });

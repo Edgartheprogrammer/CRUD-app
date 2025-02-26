@@ -42,13 +42,10 @@
     },
     {
       "id": "d186",
-      "name": "The Legend of Zelda: Breath of the Wild",
-      "genre": "Action-adventure",
-      "platform": "Nintendo Switch",
-      "release_date": "2017-03-03",
-      "price": 59.99,
-      "image": "https://example.com/botw-cover.jpg",
-      "sound": "https://example.com/botw-theme.mp3"
+      "name": "Death Stranding",
+      "genre": "Adventure",
+      "release_date": "2020-03-03",
+      "price": "66.33"
     }
   ]
 }

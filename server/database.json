@@ -5,7 +5,7 @@
       "name": "The Legend of Zelda: Breath of the Wild",
       "genre": "Action-adventure",
       "platform": "Nintendo Switch",
-      "release_date": "March 3, 2017",
+      "release_date": "2017-03-03",
       "price": 59.99,
       "image": "https://example.com/botw-cover.jpg",
       "sound": "https://example.com/botw-theme.mp3"
@@ -13,9 +13,9 @@
     {
       "id": "2",
       "name": "Super Mario Odyssey",
-      "genre": "Platformer",
+      "genre": "Platf[ormer",
       "platform": "Nintendo Switch",
-      "release_date": "October 27, 2017",
+      "release_date": "2017-10-27",
       "price": 59.99,
       "image": "https://example.com/botw-cover.jpg",
       "sound": "https://example.com/botw-theme.mp3"
@@ -25,7 +25,7 @@
       "name": "The Witcher 3: Wild Hunt",
       "genre": "Action RPG",
       "platform": "PlayStation, Xbox One, Nintendo Switch",
-      "release_date": "May 19, 2015",
+      "release_date": "2015-05-19",
       "price": 39.99,
       "image": "https://example.com/botw-cover.jpg",
       "sound": "https://example.com/botw-theme.mp3"
@@ -34,7 +34,7 @@
       "name": "Red Dead Redemption 2",
       "genre": "Action-adventure",
       "platform": "PlayStation, Xbox One",
-      "release_date": "October 26, 2018",
+      "release_date": "2018-10-26",
       "price": 59.98,
       "image": "https://example.com/botw-cover.jpg",
       "sound": "https://example.com/botw-theme.mp3",
@@ -45,7 +45,7 @@
       "name": "The Legend of Zelda: Breath of the Wild",
       "genre": "Action-adventure",
       "platform": "Nintendo Switch",
-      "release_date": "March 3, 2017",
+      "release_date": "2017-03-03",
       "price": 59.99,
       "image": "https://example.com/botw-cover.jpg",
       "sound": "https://example.com/botw-theme.mp3"

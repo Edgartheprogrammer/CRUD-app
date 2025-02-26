@@ -10,7 +10,7 @@
 <body>
     <section class="section-edit">
         <h2>Search</h2>
-        <form>
+        <form class="form">
             <input id="Id" placeholder="Enter Id">
             <input id="Name" placeholder="Enter Name">
             <input id="Genre" placeholder="Enter Genre">
@@ -22,8 +22,10 @@
                 <label><input type="checkbox" name="console" value="xbox"> Xbox</label><br>
             </fieldset>
             <input id="Price" type="number" step="0.01" placeholder="Enter Price">
-            <button id="searchButton" onclick="searchGames()">Search</button>
+            <button id="searchButton">Search</button>
+            <button id="clearButton">Clear</button>
         </form>
+        <div id="searchResults" class="search-results"></div>
     </section>
 
     <section class="section-table">
@@ -31,8 +33,8 @@
 
         </table>
     </section>
-    <script type="module" src="./src/script/services.js"></script>
-    <script type="module" src="./src/script/searchResult.js"></script>
+    <script src="./src/script/services.js"></script>
+    <script src="./src/script/searchResult.js"></script>
 </body>
 
 </html>

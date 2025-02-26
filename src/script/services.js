@@ -1,3 +1,4 @@
+//services.js
 /* ------------------------- ADD A GAME------------------------- */
 async function addGame(game) {
   try {
@@ -12,16 +13,6 @@ async function addGame(game) {
     console.log("Error adding game", error);
   }
 }
-let game = {
-  name: "The Legend of Zelda: Breath of the Wild",
-  genre: "Action-adventure",
-  platform: "Nintendo Switch",
-  release_date: "March 3, 2017",
-  price: 59.99,
-  image: "https://example.com/botw-cover.jpg",
-  sound: "https://example.com/botw-theme.mp3",
-};
-// addGame(game);
 
 /* ------------------------- GET ALL GAMES ------------------------- */
 async function getAllGames() {
@@ -29,33 +20,33 @@ async function getAllGames() {
         let response = await fetch("http://localhost:3000/video-games");
         let games = await response.json();
         console.log("Games", games);
-        return games;
-        
+        return games; 
     } catch (error) {
         console.log("Error getting games", error);
     }
 }
-// getAllGames();
 
 /* ------------------------- GET 1 GAME ------------------------- */
-export async function getGame(searchcriteria) {
+async function getGame(searchCriteria) {
     try {
         const games = await getAllGames();
         const filteredGames = games.filter(game => {
-            return Object.keys(searchcriteria).every(key => {
-                if (typeof game[key] === 'string' && typeof searchcriteria[key] === 'string') {
-                    return game [key].toLowerCase().includes(searchcriteria [key].toLocaleLowerCase)
+            return Object.keys(searchCriteria).every(key => {
+                if (!searchCriteria[key]) return true;
+
+                if (typeof game[key] === 'string' && typeof searchCriteria[key] === 'string') {
+                    return game[key].toLowerCase().includes(searchCriteria[key].toLowerCase());
                 }
-                return game[key] == searchcriteria[key]
+                return game[key] == searchCriteria[key]
             })
-        }); console.log(filteredGames)
-        return filteredGames
+        });
+        console.log(filteredGames);
+        return filteredGames;
     } catch (error) {
         console.log("Error getting game", error);
-        return []
+        return [];
     }
 }
-// getGame(1)
 
 /* ------------------------- DELETE A GAME ------------------------- */
 async function deleteGame(id) {
@@ -69,11 +60,9 @@ async function deleteGame(id) {
         console.log("Error deleting game", error);
     }
 }
-let myGame = "1d2e";
-// deleteGame(myGame)
 
 /* ------------------------- EDIT A GAME ------------------------- */
-export async function editGame(id, updateData) {
+async function editGame(id, updateData) {
     try {
         let encodedId = encodeURIComponent(id);
         let response = await fetch(`http://localhost:3000/video-games/${encodedId}`, {
@@ -89,19 +78,6 @@ export async function editGame(id, updateData) {
         console.log("Error editing game", error);
     }
 }
-let id = "4"
-
-let updateGame = {
-    name: "Red Dead Redemption 2",
-    genre: "Action-adventure",
-    platform: "PlayStation 4, Xbox One",
-    release_date: "October 26, 2018",
-    price: 59.98,
-    image: "https://example.com/botw-cover.jpg",
-    sound: "https://example.com/botw-theme.mp3"
-  }
-    
-// editGame(id, updateGame);
 
 /* ------------------------- END OF ------------------------- */
 

@@ -20,20 +20,12 @@ function displaySearchResults(games) {
   });
 }
 
-function populateFormFields(game) {
-  clearSearchResults();
-  clearFields();
-  document.getElementById('Id').value = game.id;
-  document.getElementById('Name').value = game.name;
-  document.getElementById('Genre').value = game.genre;
-  document.getElementById('ReleaseDate').value = game.release_date;
-  document.getElementById('Price').value = game.price;
-
+function createSaveButton() {
   const existingSaveButton = document.getElementById('saveEditButton');
   if (existingSaveButton) {
     existingSaveButton.remove();
   }
-
+  
   const formElement = document.getElementById('editForm');
   const saveButton = document.createElement('button');
   saveButton.textContent = 'Save Changes';
@@ -46,6 +38,21 @@ function populateFormFields(game) {
     saveButton.remove();
     clearFields();
   });
+}
+
+function fillFormFields(game) {
+  document.getElementById('Id').value = game.id;
+  document.getElementById('Name').value = game.name;
+  document.getElementById('Genre').value = game.genre;
+  document.getElementById('ReleaseDate').value = game.release_date;
+  document.getElementById('Price').value = game.price;
+}
+
+function populateFormFields(game) {
+  clearSearchResults();
+  clearFields();
+  fillFormFields(game);
+  createSaveButton();
 }
 
 function clearSearchResults() {

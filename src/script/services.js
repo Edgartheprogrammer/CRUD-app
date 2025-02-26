@@ -62,7 +62,7 @@ async function deleteGame(id) {
 }
 
 /* ------------------------- EDIT A GAME ------------------------- */
-async function editGame(id, updateData) {
+async function editGame(id, updatedData) {
     try {
         let encodedId = encodeURIComponent(id);
         let response = await fetch(`http://localhost:3000/video-games/${encodedId}`, {
@@ -70,7 +70,7 @@ async function editGame(id, updateData) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(updateData) });
+            body: JSON.stringify(updatedData) });
         
         let game = await response.json();
         console.log("Game", game);

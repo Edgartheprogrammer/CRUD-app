@@ -1,50 +1,13 @@
 // searchResult.js
-function getFormValue(id) {
-  return document.getElementById(id).value;
-}
 
 function getSearchCriteria() {
   return {
-    id: getFormValue('Id'),
-    name: getFormValue('Name'),
-    genre: getFormValue('Genre'),
-    release_date: getFormValue('ReleaseDate'),
-    price: getFormValue('Price')
+    id: document.getElementById('Id').value,
+    name: document.getElementById('Name').value,
+    genre: document.getElementById('Genre').value,
+    release_date: document.getElementById('ReleaseDate').value,
+    price: document.getElementById('Price').value,
   };
-}
-
-function updateElementContent(id, content) {
-  document.getElementById(id).innerHTML = content;
-}
-
-function clearSearchResults() {
-  updateElementContent('searchResults', '');
-  console.log('Clearing search results...');
-}
-
-function displayNoResultsMessage() {
-  updateElementContent('searchResults', '<div>No matching game found.</div>');
-}
-
-function clearFields() {
-  document.querySelector('form').reset();
-  clearSearchResults();
-}
-
-function populateFormFields(game) {
-  clearSearchResults();
-  clearFields();
-  
-  ['Id', 'Name', 'Genre', 'ReleaseDate', 'Price'].forEach(field => {
-    const key = field === 'ReleaseDate' ? 'release_date' : field.toLowerCase();
-    document.getElementById(field).value = game[key];
-  });
-  
-  const formElement = document.getElementById('editForm');
-  const saveButton = document.createElement('button');
-  saveButton.textContent = 'Save Changes';
-  saveButton.id = 'saveEditButton';
-  formElement.appendChild(saveButton);
 }
 
 function displaySearchResults(games) {
@@ -57,30 +20,72 @@ function displaySearchResults(games) {
   });
 }
 
-async function searchGames(event) {
-  if (event) event.preventDefault();
+function populateFormFields(game) {
+  clearSearchResults();
+  clearFields();
+  document.getElementById('Id').value = game.id;
+  document.getElementById('Name').value = game.name;
+  document.getElementById('Genre').value = game.genre;
+  document.getElementById('ReleaseDate').value = game.release_date;
+  document.getElementById('Price').value = game.price;
+  const formElement = document.getElementById('editForm');
+  const saveButton = document.createElement('button');
+  saveButton.textContent = `Save Changes`;
+  saveButton.id = 'saveEditButton';
+  formElement.appendChild(saveButton);
+}
+
+function clearSearchResults() {
+  const searchResultsDiv = document.getElementById('searchResults');
+  console.log('Clearing search results...');
+  searchResultsDiv.innerHTML = '';
+}
+
+function displayNoResultsMessage() {
+  const searchResultsDiv = document.getElementById('searchResults');
+  searchResultsDiv.innerHTML = '<div>No matching game found.</div>';
+}
+
+function clearFields() {
+  document.querySelector('form').reset();
+  clearSearchResults();
+}
+
+async function searchGames() {
   try {
-    const games = await getGame(getSearchCriteria());
+    const searchcriteria = getSearchCriteria();
+    const games = await getGame(searchcriteria);
     clearSearchResults();
-    
+
     if (games.length === 0) {
       console.log('No matching game found.');
       displayNoResultsMessage();
       return;
     }
-    
-    games.length === 1 ? populateFormFields(games[0]) : displaySearchResults(games);
+
+    if (games.length === 1) {
+      const game = games[0];
+      populateFormFields(game);
+      return;
+    }
+
+    displaySearchResults(games);
   } catch (error) {
     console.log('Error. Unable to display search result: ', error);
   }
 }
 
-async function updateGame(event) {
-  if (event) event.preventDefault();
+async function updateGame() {
   try {
-    const id = getFormValue('Id');
-    const updateData = getSearchCriteria();
-    await editGame(id, updateData);
+    let id = document.getElementById('Id').value;
+    let updatedData = {
+      id: document.getElementById('Id').value,
+      name: document.getElementById('Name').value,
+      genre: document.getElementById('Genre').value,
+      release_date: document.getElementById('ReleaseDate').value,
+      price: document.getElementById('Price').value,
+    };
+    editGame(id, updatedData);
   } catch (error) {
     console.log('Error. Unable to update game fields: ', error);
   }
@@ -101,8 +106,7 @@ document
   });
 
 document
-  .getElementById('editForm')
-  .addEventListener('click', function (event) {
+  .getElementById('editForm').addEventListener('click', function (event) {
     event.preventDefault();
     editGame();
   });

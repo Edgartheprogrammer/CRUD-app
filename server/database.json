@@ -39,13 +39,6 @@
       "image": "https://example.com/botw-cover.jpg",
       "sound": "https://example.com/botw-theme.mp3",
       "id": "4"
-    },
-    {
-      "id": "d186",
-      "name": "Death Stranding II",
-      "genre": "Adventure",
-      "release_date": "2020-03-03",
-      "price": "66.33"
     }
   ]
 }

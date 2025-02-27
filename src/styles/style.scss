@@ -1,0 +1,161 @@
+// style.scss
+@import './variables.scss';
+@import './popup.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $color-bg-dark;
+    font-family: $font-family-primary;
+    color: $color-text-primary;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    position: relative;
+}
+
+.header {
+    padding: $spacing-lg 0;
+    text-align: center;
+    width: 100%;
+    background-color: $color-secondary;
+
+    &__title {
+        color: $color-white;
+        font-family: $font-family-secondary;
+        font-size: $font-size-xl;
+    }
+}
+
+.main {
+    width: 100%;
+    max-width: 1200px;
+    background-color: $color-bg-light;
+    border-radius: $border-radius-md;
+    box-shadow: $box-shadow-md;
+    display: flex;
+    flex-direction: row;
+    margin: $spacing-lg;
+
+    .section {
+        &--edit {
+            flex: 1;
+            padding: $spacing-lg;
+            background-color: $color-primary-light;
+
+            .section__title {
+                color: $color-white;
+                font-family: $font-family-secondary;
+                font-size: $font-size-lg;
+                text-align: center;
+                margin-bottom: $spacing-md;
+            }
+
+            .form {
+                display: flex;
+                flex-direction: column;
+                gap: $spacing-md;
+
+                &__input {
+                    padding: $spacing-sm;
+                    border: none;
+                    border-radius: $border-radius-sm;
+                    background-color: $color-bg-dark;
+                    color: $color-text-primary;
+                    font-family: $font-family-primary;
+                }
+
+                &__button {
+                    &--search {
+                        background-color: $color-tertiary;
+
+                        &:hover {
+                            background-color: $color-tertiary-dark;
+                        }
+                    }
+
+                    &--clear {
+                        background-color: $color-secondary;
+
+                        &:hover {
+                            background-color: $color-secondary-dark;
+                        }
+                    }
+                }
+
+                &__fieldset {
+                    border: 2px solid $color-bg-light;
+                    border-radius: $border-radius-sm;
+                    padding: $spacing-md;
+
+                    legend {
+                        color: $color-bg-dark;
+                        font-family: $font-family-secondary;
+                        font-size: $font-size-sm;
+                    }
+
+                    label {
+                        color: $color-text-primary;
+                        font-family: $font-family-primary;
+                    }
+                }
+            }
+        }
+
+        &--table {
+            flex: 2;
+            padding: $spacing-lg;
+            background-color: $color-primary-dark;
+
+            .table {
+                width: 100%;
+                border-collapse: collapse;
+                color: $color-text-primary;
+
+                th,
+                td {
+                    padding: $spacing-sm;
+                    border: 1px solid $color-primary-light;
+                }
+
+                th {
+                    background-color: $color-primary;
+                    color: $color-white;
+                    font-family: $font-family-secondary;
+                }
+            }
+        }
+    }
+}
+
+button {
+    padding: $button-padding-md;
+    border: none;
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    font-family: $font-family-primary;
+    transition: background-color 0.3s ease;
+    color: white;
+
+    &#saveEditButton {
+        background-color: $color-primary;
+
+        &:hover {
+            background-color: $color-primary-dark;
+        }
+    }
+
+    &#deleteButton {
+        background-color: $color-bg-light;
+
+        &:hover {
+            background-color: $color-bg-dark;
+        }
+    }
+}

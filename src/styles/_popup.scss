@@ -1,0 +1,121 @@
+// popup.scss
+@import './variables';
+
+.popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color-black, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    .popup-content {
+        background-color: $color-bg-dark;
+        padding: $spacing-lg;
+        border-radius: $border-radius-md;
+        box-shadow: $box-shadow-lg;
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+
+        h3 {
+            margin-top: 0;
+            font-size: $font-size-xl;
+            color: $color-primary;
+            font-family: $font-family-secondary;
+        }
+
+        p {
+            font-size: $font-size-md;
+            color: $color-text-secondary;
+            margin-bottom: $spacing-lg;
+        }
+
+        .popup-buttons {
+            display: flex;
+            justify-content: center;
+            gap: $spacing-md;
+
+            button {
+                padding: $button-padding-md;
+                border: none;
+                border-radius: $border-radius-sm;
+                cursor: pointer;
+                font-size: $font-size-md;
+                font-family: $font-family-primary;
+                transition: background-color 0.3s ease;
+
+                &.confirm-button {
+                    background-color: $color-primary;
+                    color: $color-white;
+
+                    &:hover {
+                        background-color: $color-primary-dark;
+                    }
+                }
+
+                &:not(.confirm-button) {
+                    background-color: $color-secondary;
+                    color: $color-black;
+
+                    &:hover {
+                        background-color: $color-secondary-dark;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.search-results-popup {
+    width: 90%;
+    max-width: 600px;
+    background-color: $color-bg-dark;
+    padding: $spacing-lg;
+    border-radius: $border-radius-md;
+    box-shadow: $box-shadow-lg;
+    text-align: center;
+
+    .search-results-list {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-sm;
+        margin: $spacing-lg 0;
+
+        .search-result-item {
+            padding: $spacing-md;
+            text-align: left;
+            background-color: $color-primary;
+            border: none;
+            border-radius: $border-radius-sm;
+            cursor: pointer;
+            color: $color-text-primary;
+            font-family: $font-family-primary;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: rgba($color-primary, 0.2);
+            }
+        }
+    }
+
+    button {
+        padding: $button-padding-md;
+        border: none;
+        border-radius: $border-radius-sm;
+        cursor: pointer;
+        font-size: $font-size-md;
+        font-family: $font-family-primary;
+        background-color: $color-secondary;
+        color: $color-black;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: $color-secondary-dark;
+        }
+    }
+}

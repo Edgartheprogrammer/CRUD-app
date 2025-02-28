@@ -101,7 +101,7 @@ export async function editGame(id, updatedData) {
 }
 
 /* ------------------------- PRINT GAMES ------------------------- */
-async function printGames() {
+export async function printGames() {
   const table = document.getElementById('gameTable');
   const tableHead = `
       <tr>

@@ -87,3 +87,32 @@ async function editGame(id, updatedData) {
     throw error;
   }
 }
+
+async function printGames() {
+  const table = document.getElementById('gameTable');
+  const tableHead = `
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Genre</th>
+        <th>Release</th>
+        
+      </tr>
+  `;    
+
+  const games = await getAllGames();
+  table.innerHTML = '';
+  table.innerHTML = tableHead;
+
+  games.foreach((game) => {
+    table.insertAdjacentHTML("beforeend",
+      `<tr>
+          <td>${game.id}</td>
+          <td>${game.name}</td>
+          <td>${game.genre}</td>
+          <td>${game.release_date}</td>
+      </tr>`
+    )
+  })
+}
+

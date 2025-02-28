@@ -109,7 +109,9 @@ async function printGames() {
         <th>Id</th>
         <th>Name</th>
         <th>Genre</th>
-        <th>Release</th>
+        <th>Platform</th>
+        <th>Price</th>
+        <th>Release Date</th>
         
       </tr>
   `;
@@ -118,15 +120,19 @@ async function printGames() {
   table.innerHTML = '';
   table.innerHTML = tableHead;
 
-  games.foreach((game) => {
+  games.forEach((game) => {
     table.insertAdjacentHTML(
       'beforeend',
       `<tr>
           <td>${game.id}</td>
           <td>${game.name}</td>
           <td>${game.genre}</td>
+          <td>${game.platform}</td>
+          <td>${game.price}</td>
           <td>${game.release_date}</td>
+
       </tr>`
     );
   });
 }
+printGames()

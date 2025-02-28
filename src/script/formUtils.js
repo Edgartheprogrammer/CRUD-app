@@ -113,39 +113,31 @@ export function getFormData() {
 }
 
 export function fillFormFields(game, isEditMode = false) {
-  document.getElementById('Id').value = game.id || '';
-  document.getElementById('Name').value = game.name || '';
-  document.getElementById('Genre').value = game.genre || '';
-  document.getElementById('ReleaseDate').value = game.release_date || '';
-  document.getElementById('Price').value = game.price || '';
+    // Fill other fields
+    document.getElementById('Id').value = game.id || '';
+    document.getElementById('Name').value = game.name || '';
+    document.getElementById('Genre').value = game.genre || '';
+    document.getElementById('ReleaseDate').value = game.release_date || '';
+    document.getElementById('Price').value = game.price || '';
 
-  // Handle console checkboxes
-  document.querySelectorAll('.form__checkbox').forEach(checkbox => {
-    checkbox.checked = game.consoles?.includes(checkbox.value) || false;
-  });
+    // Handle console checkboxes
+    document.querySelectorAll('.form__checkbox').forEach(checkbox => {
+        checkbox.checked = game.consoles?.includes(checkbox.value) || false;
+    });
 
-  // Handle image preview and upload visibility
-  const imagePreview = document.getElementById('imagePreview');
-  const imageUpload = document.getElementById('ImageUpload');
+    // Handle image preview and upload visibility
+    const imagePreview = document.getElementById('imagePreview');
+    const imageUpload = document.getElementById('ImageUpload');
 
-  if (isEditMode) {
-    // In edit mode, only show image preview if an image exists
     if (game.image) {
-      imagePreview.src = game.image;
-      imagePreview.style.display = 'block';
-      imageUpload.style.display = 'block';
+        // Set the image preview source
+        imagePreview.src = game.image;
+        imagePreview.style.display = 'block'; // Show the image preview
+        imageUpload.style.display = isEditMode ? 'block' : 'none'; // Show upload field in edit mode
     } else {
-      imagePreview.style.display = 'none';
-      imageUpload.style.display = 'none';
+        // Hide the image preview if no image is available
+        imagePreview.style.display = 'none';
+        imagePreview.src = ''; // Clear the src to avoid broken link
+        imageUpload.style.display = isEditMode ? 'block' : 'none'; // Show upload field in edit mode
     }
-  } else {
-    // In add mode, hide image preview initially
-    if (game.image) {
-      imagePreview.src = game.image;
-      imagePreview.style.display = 'block';
-    } else {
-      imagePreview.style.display = 'none';
-    }
-    imageUpload.style.display = 'block';
-  }
 }

@@ -18,7 +18,8 @@
                 <input class="form__input" id="Id" placeholder="Enter Id">
                 <input class="form__input" id="Name" placeholder="Enter Name">
                 <input class="form__input" id="Genre" placeholder="Enter Genre">
-                <input class="form__input" id="ReleaseDate" type="date" max="2025-12-31" placeholder="Enter Release Date">
+                <input class="form__input" id="ReleaseDate" type="date" max="2025-12-31"
+                    placeholder="Enter Release Date">
                 <fieldset class="form__fieldset">
                     <legend class="form__legend">Choose consoles:</legend>
                     <label class="form__label">
@@ -32,8 +33,11 @@
                     </label><br>
                 </fieldset>
                 <input class="form__input" id="Price" type="number" step="0.01" placeholder="Enter Price">
-                <button class="form__button form__button--search" id="searchButton">Search</button>
-                <button class="form__button form__button--clear" id="clearButton">Clear</button>
+                <div id="imagePreviewContainer">
+                    <img id="imagePreview" src="" alt="Game Image Preview" class="form__image-preview"
+                        style="display: none;">
+                </div>
+                <input type="file" id="ImageUpload" accept="image/*" style="display: none;">
             </form>
         </section>
 
@@ -44,16 +48,20 @@
                     <th class="th">Name</th>
                     <th class="th">Genre</th>
                     <th class="th">Release Date</th>
-                    
                 </tr>
             </table>
         </section>
     </main>
 
-    <script src="./src/script/services.js"></script>
+    <script type="module" src="./src/script/constants.js"></script>
     <script type="module" src="./src/script/formHandlers.js"></script>
-    <script type="module" src="./src/script/buttonHandlers.js"></script>
-    <script type="module" src="./src/script/searchHandlers.js"></script>
+    <script type="module" src="./src/script/formUtils.js"></script>
+    <script type="module" src="./src/script/gameHandlers.js"></script>
+    <script type="module" src="./src/script/imagePreviewHandler.js"></script>
+    <script type="module" src="./src/script/messageUtils.js"></script>
     <script type="module" src="./src/script/popupUtils.js"></script>
+    <script type="module" src="./src/script/searchHandlers.js"></script>
+    <script type="module" src="./src/script/services.js"></script>
 </body>
+
 </html>

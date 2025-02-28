@@ -338,4 +338,11 @@ body {
 }
 .search-results-popup button:hover {
   background-color: #cc7033;
+}
+
+.form__image-preview {
+  width: 50px;
+  height: 50px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }/*# sourceMappingURL=main.css.map */

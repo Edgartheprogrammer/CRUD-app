@@ -1,7 +1,7 @@
 // services.js
 
 /* ------------------------- ADD A GAME ------------------------- */
-async function addGame(game) {
+export async function addGame(game) {
   try {
     let response = await fetch('http://localhost:3000/video-games', {
       method: 'POST',
@@ -30,33 +30,32 @@ async function getAllGames() {
 }
 
 /* ------------------------- GET FILTERED GAMES ------------------------- */
-async function getGame(searchCriteria) {
+export async function getGame(searchCriteria) {
   try {
-    const games = await getAllGames();
-    const filteredGames = games.filter((game) => {
-      return Object.keys(searchCriteria).every((key) => {
-        if (!searchCriteria[key]) return true;
+    if (!searchCriteria || typeof searchCriteria !== 'object') {
+      throw new Error("Invalid search criteria provided.");
+    }
 
-        if (
-          typeof game[key] === 'string' &&
-          typeof searchCriteria[key] === 'string'
-        ) {
-          return game[key]
-            .toLowerCase()
-            .includes(searchCriteria[key].toLowerCase());
+    const games = await getAllGames();
+    const filteredGames = games.filter(game => {
+      return Object.keys(searchCriteria).every(key => {
+        if (!searchCriteria[key]) return true; 
+
+        if (typeof game[key] === 'string' && typeof searchCriteria[key] === 'string') {
+          return game[key].toLowerCase().includes(searchCriteria[key].toLowerCase());
         }
         return game[key] == searchCriteria[key];
       });
     });
+
     return filteredGames;
   } catch (error) {
-    console.log('Error getting game', error);
+    console.log("Error getting game", error);
     return [];
   }
 }
-
 /* ------------------------- DELETE A GAME ------------------------- */
-async function deleteGame(id) {
+export async function deleteGame(id) {
   try {
     let encodedId = encodeURIComponent(id);
     let response = await fetch(
@@ -80,7 +79,7 @@ async function deleteGame(id) {
 }
 
 /* ------------------------- EDIT A GAME ------------------------- */
-async function editGame(id, updatedData) {
+export async function editGame(id, updatedData) {
   try {
     let encodedId = encodeURIComponent(id);
     let response = await fetch(
@@ -109,7 +108,9 @@ async function printGames() {
         <th>Id</th>
         <th>Name</th>
         <th>Genre</th>
-        <th>Release</th>
+        <th>Platform</th>
+        <th>Price</th>
+        <th>Release Date</th>
         
       </tr>
   `;
@@ -118,15 +119,19 @@ async function printGames() {
   table.innerHTML = '';
   table.innerHTML = tableHead;
 
-  games.foreach((game) => {
+  games.forEach((game) => {
     table.insertAdjacentHTML(
       'beforeend',
       `<tr>
           <td>${game.id}</td>
           <td>${game.name}</td>
           <td>${game.genre}</td>
+          <td>${game.platform}</td>
+          <td>${game.price}</td>
           <td>${game.release_date}</td>
+
       </tr>`
     );
   });
 }
+printGames()

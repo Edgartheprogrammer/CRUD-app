@@ -7,7 +7,7 @@
       "platform": "Nintendo Switch",
       "release_date": "2017-03-03",
       "price": 59.99,
-      "image": "https://example.com/botw-cover.jpg",
+      "image": "./assets/images/image1.webp",
       "sound": "https://example.com/botw-theme.mp3"
     },
     {
@@ -17,7 +17,7 @@
       "platform": "Nintendo Switch",
       "release_date": "2017-10-27",
       "price": 59.99,
-      "image": "https://example.com/botw-cover.jpg",
+      "image": "./assets/images/image2.webp",
       "sound": "https://example.com/botw-theme.mp3"
     },
     {
@@ -27,7 +27,7 @@
       "platform": "PlayStation, Xbox One, Nintendo Switch",
       "release_date": "2015-05-19",
       "price": 39.99,
-      "image": "https://example.com/botw-cover.jpg",
+      "image": "./assets/images/image3.webp",
       "sound": "https://example.com/botw-theme.mp3"
     },
     {
@@ -36,7 +36,7 @@
       "platform": "PlayStation, Xbox One",
       "release_date": "2018-10-26",
       "price": 59.98,
-      "image": "https://example.com/botw-cover.jpg",
+      "image": "./assets/images/image4.webp",
       "sound": "https://example.com/botw-theme.mp3",
       "id": "4"
     }

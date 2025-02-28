@@ -1,7 +1,7 @@
 // services.js
 
 /* ------------------------- ADD A GAME ------------------------- */
-async function addGame(game) {
+export async function addGame(game) {
   try {
     let response = await fetch('http://localhost:3000/video-games', {
       method: 'POST',
@@ -30,33 +30,32 @@ async function getAllGames() {
 }
 
 /* ------------------------- GET FILTERED GAMES ------------------------- */
-async function getGame(searchCriteria) {
+export async function getGame(searchCriteria) {
   try {
-    const games = await getAllGames();
-    const filteredGames = games.filter((game) => {
-      return Object.keys(searchCriteria).every((key) => {
-        if (!searchCriteria[key]) return true;
+    if (!searchCriteria || typeof searchCriteria !== 'object') {
+      throw new Error("Invalid search criteria provided.");
+    }
 
-        if (
-          typeof game[key] === 'string' &&
-          typeof searchCriteria[key] === 'string'
-        ) {
-          return game[key]
-            .toLowerCase()
-            .includes(searchCriteria[key].toLowerCase());
+    const games = await getAllGames();
+    const filteredGames = games.filter(game => {
+      return Object.keys(searchCriteria).every(key => {
+        if (!searchCriteria[key]) return true; 
+
+        if (typeof game[key] === 'string' && typeof searchCriteria[key] === 'string') {
+          return game[key].toLowerCase().includes(searchCriteria[key].toLowerCase());
         }
         return game[key] == searchCriteria[key];
       });
     });
+
     return filteredGames;
   } catch (error) {
-    console.log('Error getting game', error);
+    console.log("Error getting game", error);
     return [];
   }
 }
-
 /* ------------------------- DELETE A GAME ------------------------- */
-async function deleteGame(id) {
+export async function deleteGame(id) {
   try {
     let encodedId = encodeURIComponent(id);
     let response = await fetch(
@@ -80,7 +79,7 @@ async function deleteGame(id) {
 }
 
 /* ------------------------- EDIT A GAME ------------------------- */
-async function editGame(id, updatedData) {
+export async function editGame(id, updatedData) {
   try {
     let encodedId = encodeURIComponent(id);
     let response = await fetch(

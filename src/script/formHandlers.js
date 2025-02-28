@@ -48,6 +48,7 @@ export function setFormMode(mode, game = null) {
 
     case 'SEARCH':
       showFields(true);
+      if (idField) idField.readOnly = false;
       if (imagePreview) imagePreview.style.display = 'none';
       if (imageUpload) imageUpload.style.display = 'none';
       createSearchButton();
@@ -56,13 +57,16 @@ export function setFormMode(mode, game = null) {
       break;
 
     case 'EDIT':
+      showFields(true);
       if (game) {
         fillFormFields(game, true);
       }
-      showFields(true);
       if (idField) idField.readOnly = true;
-      if (imagePreview && !game?.image) {
-        imagePreview.style.display = 'none';
+      if (imagePreview) {
+        imagePreview.style.display = game?.image ? 'block' : 'none';
+        if (game?.image) {
+          imagePreview.src = game.image;
+        }
       }
       if (imageUpload) {
         imageUpload.style.display = 'block';
@@ -73,13 +77,16 @@ export function setFormMode(mode, game = null) {
       break;
 
     case 'DELETE':
+      showFields(true);
       if (game) {
         fillFormFields(game);
       }
-      showFields(true);
       if (idField) idField.readOnly = true;
-      if (imagePreview && !game?.image) {
-        imagePreview.style.display = 'none';
+      if (imagePreview) {
+        imagePreview.style.display = game?.image ? 'block' : 'none';
+        if (game?.image) {
+          imagePreview.src = game.image;
+        }
       }
       if (imageUpload) {
         imageUpload.style.display = 'none';

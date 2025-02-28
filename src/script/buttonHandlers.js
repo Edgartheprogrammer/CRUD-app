@@ -1,5 +1,11 @@
 // buttonHandlers.js
-import { getSearchCriteria } from "./formHandlers.js";
+import { getSearchCriteria, setFormMode } from "./formHandlers.js";
+import { clearFormFields, getFormData } from "./formUtils.js";
+import { setPreviousAction } from "./constants.js";
+import { displaySearchResults, searchGames } from "./searchHandlers.js";
+import { showTransientMessage } from "./messageUtils.js";
+import { getPreviousAction } from "./constants.js";
+import { editGame } from "./services.js";
 
 export function removeExistingButtons() {
   const buttonIds = ['addButton', 'editButton', 'cancelButton', 'saveButton', 'deleteButton', 'searchButton', 'clearButton'];
@@ -71,25 +77,38 @@ export function createCancelButton() {
 export function createSearchButton() {
   return createButton('searchButton', 'Search', 'form__button--search', async event => {
     event.preventDefault();
-    const criteria = getSearchCriteria();
-    const results = await searchGames(criteria);
-
-    if (results.length === 1) {
-      const game = results[0];
-      if (getPreviousAction() === 'EDIT') {
-        setFormMode('EDIT', game);
-      } else if (getPreviousAction() === 'DELETE') {
-        setFormMode('DELETE', game);
+    try {
+      const criteria = getSearchCriteria();
+      const results = await searchGames(criteria);
+      
+      if (results.length === 0) {
+        showTransientMessage('Info', 'No games found matching your criteria.');
+        return;
       }
-    } else if (results.length > 1) {
-      displaySearchResults(results);
-    } else {
-      showTransientMessage('Info', 'No games found matching your criteria.');
+
+      if (results.length === 1) {
+        const game = results[0];
+        // Make sure the game object has consoles property for checkbox handling
+        if (game.platform && !game.consoles) {
+          game.consoles = Array.isArray(game.platform) ? game.platform : [game.platform];
+        }
+        
+        const previousAction = getPreviousAction();
+        if (previousAction === 'EDIT') {
+          setFormMode('EDIT', game); // Set form to EDIT mode
+        } else if (previousAction === 'DELETE') {
+          setFormMode('DELETE', game); // Set form to DELETE mode
+        }
+      } else if (results.length > 1) {
+        displaySearchResults(results);
+      }
+    } catch (error) {
+      console.error('Error during search:', error);
+      showTransientMessage('Error', 'Failed to search for games. Please try again.');
     }
   });
 }
 
-// Function to create a "Clear" button
 export function createClearButton() {
   return createButton('clearButton', 'Clear', 'form__button--clear', event => {
     event.preventDefault();

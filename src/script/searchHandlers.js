@@ -1,10 +1,10 @@
 // searchHandlers.js
 import { getSearchCriteria } from './formHandlers.js';
 import { createPopupContainer, removeExistingPopups, clearSearchResults, removePopup } from './popupUtils.js';
-import { createDeleteButton, createSaveButton } from './buttonHandlers.js';
 import { clearFormFields, fillFormFields } from './formUtils.js';
+import { getGame } from './services.js';
 
-function displaySearchResults(games) {
+export function displaySearchResults(games) {
   removeExistingPopups();
 
   const popupContainer = createPopupContainer();
@@ -22,11 +22,34 @@ function displaySearchResults(games) {
   games.forEach((game) => {
     const resultButton = document.createElement('button');
     resultButton.className = 'search-result-item';
-    resultButton.textContent = `${game.id} ${game.name} ${game.genre} ${game.platform} ${game.releaseYear}`;
+
+    // Create a container for the game details
+    const gameDetails = document.createElement('div');
+    gameDetails.className = 'game-details';
+
+    // Add the game image (if it exists)
+    if (game.image) {
+      const gameImage = document.createElement('img');
+      gameImage.src = game.image;
+      gameImage.alt = `${game.name} Image`;
+      gameImage.style.width = '50px'; // Set width to 50px
+      gameImage.style.height = '50px';
+      gameImage.style.objectFit = 'cover';
+      gameDetails.appendChild(gameImage);
+    }
+
+    const gameInfo = document.createElement('div');
+    gameInfo.className = 'game-info';
+    gameInfo.textContent = `${game.id} ${game.name} ${game.genre} ${game.platform} ${game.releaseYear}`;
+    gameDetails.appendChild(gameInfo);
+
+    resultButton.appendChild(gameDetails);
+
     resultButton.addEventListener('click', () => {
       populateFormFields(game);
       removePopup(popupContainer);
     });
+
     resultsContainer.appendChild(resultButton);
   });
   
@@ -46,8 +69,14 @@ function populateFormFields(game) {
   clearSearchResults();
   clearFormFields();
   fillFormFields(game);
-  createSaveButton();
-  createDeleteButton();
+
+  const previousAction = getPreviousAction();
+
+  if (previousAction === 'EDIT') {
+    setFormMode('EDIT', game);
+  } else if (previousAction === 'DELETE') {
+    setFormMode('DELETE', game);
+  }
 }
 
 export async function searchGames() {
@@ -59,18 +88,13 @@ export async function searchGames() {
     if (games.length === 0) {
       console.log('No matching game found.');
       displayNoResultsMessage();
-      return;
+      return [];
     }
     
-    if (games.length === 1) {
-      const game = games[0];
-      populateFormFields(game);
-      return;
-    }
-    
-    displaySearchResults(games);
+    return games; // Return games instead of handling them directly
   } catch (error) {
     console.log('Error. Unable to display search result: ', error);
     alert('Error searching for games. Please try again.');
+    return [];
   }
 }

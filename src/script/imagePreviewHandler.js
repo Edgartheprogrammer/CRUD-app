@@ -1,3 +1,4 @@
+// imagePreviewHandler.js
 export function setupImagePreview() {
   const imageUpload = document.getElementById('ImageUpload');
   const imagePreview = document.getElementById('imagePreview');

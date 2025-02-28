@@ -194,6 +194,7 @@ body {
   width: 100%;
   border-collapse: collapse;
   color: #f5f5f5;
+  font-size: 17px;
 }
 .main .section--table .table th,
 .main .section--table .table td {
@@ -202,7 +203,7 @@ body {
 }
 .main .section--table .table th {
   background-color: #6a5acd;
-  color: #f5f5f5;
+  color: #f2f3e9;
   font-family: "Press Start 2P", cursive;
 }
 
@@ -300,6 +301,7 @@ body {
   width: 90%;
   max-width: 600px;
   background-color: #1a1a1a;
+<<<<<<< HEAD:src/styles/main.css
   padding: 24px;
   border-radius: 8px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
@@ -338,6 +340,7 @@ body {
 }
 .search-results-popup button:hover {
   background-color: #cc7033;
+<<<<<<< HEAD
 }
 
 .form__image-preview {
@@ -346,3 +349,10 @@ body {
   -o-object-fit: cover;
      object-fit: cover;
 }/*# sourceMappingURL=main.css.map */
+=======
+}/*# sourceMappingURL=main.css.map */
+=======
+}/*# sourceMappingURL=style.css.map */
+
+>>>>>>> fcb85ab (complete table on html and services.js, added printGames function and create a readde.md file):src/styles/style.css
+>>>>>>> 799a446562a4bbbd78de341c6b1ea5dad0037b6f

@@ -1,0 +1,110 @@
+@import './variables';
+
+button {
+    padding: $button-padding-md;
+    border: none;
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    font-family: $font-family-primary;
+    transition: background-color 0.3s ease;
+    color: white;
+
+    &#saveEditButton {
+        background-color: $color-primary;
+
+        &:hover {
+            background-color: $color-primary-dark;
+        }
+    }
+
+    &#deleteButton {
+        background-color: $color-bg-light;
+
+        &:hover {
+            background-color: $color-bg-dark;
+        }
+    }
+
+    &#addButton {
+        background-color: $color-primary;
+
+        &:hover {
+            background-color: $color-primary-dark;
+        }
+    }
+}
+
+#addNewButton {
+        background-color: $color-tertiary;
+
+        &:hover {
+            background-color: $color-tertiary-dark;
+        }
+    }
+
+#editGameButton {
+        background-color: $color-secondary;
+
+        &:hover {
+            background-color: $color-secondary-dark;
+        }
+    }
+
+.table__button--select,
+#deleteGameButton {
+        background-color: $color-bg-light;
+
+        &:hover {
+            background-color: $color-bg-dark;
+        }
+    }
+
+#confirmDeleteButton {
+        background-color: $color-bg-light;
+
+        &:hover {
+            background-color: $color-bg-dark;
+        }
+    }
+
+#saveButton {
+        background-color: $color-tertiary;
+
+        &:hover {
+            background-color: $color-tertiary-dark;
+        }
+    }
+
+#clearFieldsButton,
+#clearButton {
+        background-color: $color-bg-light;
+
+        &:hover {
+            background-color: $color-bg-dark;
+        }
+    }
+
+#cancelButton {
+    color: $color-bg-dark;
+    background-color: $color-grey-light;
+
+        &:hover {
+            background-color: $color-grey;
+        }
+    }
+
+#searchButton {
+    background-color: $color-primary;
+
+        &:hover {
+            background-color: $color-primary-dark;
+        }
+    }
+
+#editButton {
+    background-color: $color-secondary;
+
+        &:hover {
+            background-color: $color-secondary-dark;
+        }
+    }

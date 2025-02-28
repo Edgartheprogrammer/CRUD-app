@@ -1,7 +1,8 @@
 // searchHandlers.js
-import { getSearchCriteria, clearFormFields, fillFormFields } from './formHandlers.js';
+import { getSearchCriteria } from './formHandlers.js';
 import { createPopupContainer, removeExistingPopups, clearSearchResults, removePopup } from './popupUtils.js';
 import { createDeleteButton, createSaveButton } from './buttonHandlers.js';
+import { clearFormFields, fillFormFields } from './formUtils.js';
 
 function displaySearchResults(games) {
   removeExistingPopups();

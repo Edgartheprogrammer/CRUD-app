@@ -113,31 +113,34 @@ export function getFormData() {
 }
 
 export function fillFormFields(game, isEditMode = false) {
-    // Fill other fields
     document.getElementById('Id').value = game.id || '';
     document.getElementById('Name').value = game.name || '';
     document.getElementById('Genre').value = game.genre || '';
     document.getElementById('ReleaseDate').value = game.release_date || '';
     document.getElementById('Price').value = game.price || '';
 
-    // Handle console checkboxes
-    document.querySelectorAll('.form__checkbox').forEach(checkbox => {
-        checkbox.checked = game.consoles?.includes(checkbox.value) || false;
+    const consoleFieldset = document.querySelector('.form__fieldset');
+    if (consoleFieldset) {
+        consoleFieldset.style.display = 'block';
+    }
+
+    const platforms = game.platform?.split(',').map(p => p.trim()) || [];
+
+    const consoleCheckboxes = document.querySelectorAll('.form__checkbox');
+    consoleCheckboxes.forEach(checkbox => {
+        checkbox.checked = platforms.includes(checkbox.value);
     });
 
-    // Handle image preview and upload visibility
     const imagePreview = document.getElementById('imagePreview');
     const imageUpload = document.getElementById('ImageUpload');
 
     if (game.image) {
-        // Set the image preview source
         imagePreview.src = game.image;
-        imagePreview.style.display = 'block'; // Show the image preview
-        imageUpload.style.display = isEditMode ? 'block' : 'none'; // Show upload field in edit mode
+        imagePreview.style.display = 'block';
+        imageUpload.style.display = isEditMode ? 'block' : 'none';
     } else {
-        // Hide the image preview if no image is available
         imagePreview.style.display = 'none';
-        imagePreview.src = ''; // Clear the src to avoid broken link
-        imageUpload.style.display = isEditMode ? 'block' : 'none'; // Show upload field in edit mode
+        imagePreview.src = '';
+        imageUpload.style.display = isEditMode ? 'block' : 'none';
     }
 }

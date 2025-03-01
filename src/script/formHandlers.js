@@ -1,7 +1,17 @@
 // formHandlers.js
 
-import { removeExistingButtons, createAddButton, createEditButton, createDeleteButton, createSaveButton, createCancelButton, createClearButton, createSearchButton } from './buttonHandlers.js';
-import { fillFormFields } from './formUtils.js';
+import {
+  removeExistingButtons,
+  createAddButton,
+  createEditButton,
+  createDeleteButton,
+  createSaveButton,
+  createCancelButton,
+  createClearButton,
+  createSearchButton,
+  createAddSaveButton,
+} from './buttonHandlers.js';
+import { fillFormFields, hideAllFields } from './formUtils.js';
 import { setupImagePreview } from './imagePreviewHandler.js';
 
 export function setFormMode(mode, game = null) {
@@ -9,7 +19,7 @@ export function setFormMode(mode, game = null) {
   const nameField = document.getElementById('Name');
   const genreField = document.getElementById('Genre');
   const releaseDateField = document.getElementById('ReleaseDate');
-  const consoleFieldset = document.querySelector('.form__fieldset');
+  const platformFieldset = document.querySelector('.form__fieldset');
   const priceField = document.getElementById('Price');
   const imagePreview = document.getElementById('imagePreview');
   const imageUpload = document.getElementById('ImageUpload');
@@ -20,7 +30,7 @@ export function setFormMode(mode, game = null) {
     if (nameField) nameField.style.display = displayValue;
     if (genreField) genreField.style.display = displayValue;
     if (releaseDateField) releaseDateField.style.display = displayValue;
-    if (consoleFieldset) consoleFieldset.style.display = displayValue;
+    if (platformFieldset) platformFieldset.style.display = displayValue;
     if (priceField) priceField.style.display = displayValue;
     if (imagePreview) imagePreview.style.display = visible ? 'block' : 'none';
     if (imageUpload) imageUpload.style.display = visible ? 'block' : 'none';
@@ -41,7 +51,7 @@ export function setFormMode(mode, game = null) {
       if (idField) idField.style.display = 'none';
       if (imagePreview) imagePreview.style.display = 'none';
       if (imageUpload) imageUpload.style.display = 'block';
-      createSaveButton();
+      createAddSaveButton();
       createClearButton();
       createCancelButton();
       break;
@@ -111,6 +121,5 @@ export function getSearchCriteria() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  setupImagePreview();
   setFormMode('INITIAL');
 });

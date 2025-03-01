@@ -1,14 +1,16 @@
-// buttonHandlers.js
 import { getSearchCriteria, setFormMode } from "./formHandlers.js";
 import { clearFormFields, getFormData } from "./formUtils.js";
 import { setPreviousAction } from "./constants.js";
-import { displaySearchResults, searchGames } from "./searchHandlers.js";
+import { displayMultiResultPopup, searchGames } from "./searchHandlers.js";
 import { showTransientMessage } from "./messageUtils.js";
 import { getPreviousAction } from "./constants.js";
-import { editGame } from "./services.js";
+import { addGame, editGame } from "./services.js"; // Import addGame
 
 export function removeExistingButtons() {
-  const buttonIds = ['addButton', 'editButton', 'cancelButton', 'saveButton', 'deleteButton', 'searchButton', 'clearButton'];
+  const buttonIds = [
+    'addButton', 'editButton', 'cancelButton', 'saveButton', 'deleteButton', 
+    'searchButton', 'clearButton', 'addSaveButton' // Add 'addSaveButton'
+  ];
   buttonIds.forEach(id => document.getElementById(id)?.remove());
 }
 
@@ -66,6 +68,30 @@ export function createSaveButton() {
   });
 }
 
+export function createAddSaveButton() {
+  return createButton('addSaveButton', 'Add Game', 'form__button--add-save', async event => {
+    event.preventDefault();
+    const gameData = getFormData();
+
+    try {
+      if (!gameData.name || !gameData.genre || !gameData.release_date) {
+        showTransientMessage('Error', 'Please fill in all required fields: Name, Genre, and Release Date');
+        return;
+      }
+
+      const result = await addGame(gameData); // Call addGame for ADD mode
+      if (result) {
+        showTransientMessage('Success', 'Game added successfully!');
+        clearFormFields();
+        setFormMode('INITIAL');
+      }
+    } catch (error) {
+      console.error('Error adding game:', error);
+      showTransientMessage('Error', `Failed to add game. ${error.message || 'Unknown error'}`);
+    }
+  });
+}
+
 export function createCancelButton() {
   return createButton('cancelButton', 'Cancel', 'form__button--cancel', event => {
     event.preventDefault();
@@ -88,9 +114,9 @@ export function createSearchButton() {
 
       if (results.length === 1) {
         const game = results[0];
-        // Make sure the game object has consoles property for checkbox handling
-        if (game.platform && !game.consoles) {
-          game.consoles = Array.isArray(game.platform) ? game.platform : [game.platform];
+        // Make sure the game object has platform property for checkbox handling
+        if (game.platform && !game.platform) {
+          game.platform = Array.isArray(game.platform) ? game.platform : [game.platform];
         }
         
         const previousAction = getPreviousAction();
@@ -100,7 +126,7 @@ export function createSearchButton() {
           setFormMode('DELETE', game); // Set form to DELETE mode
         }
       } else if (results.length > 1) {
-        displaySearchResults(results);
+        displayMultiResultPopup(results);
       }
     } catch (error) {
       console.error('Error during search:', error);

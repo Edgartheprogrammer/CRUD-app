@@ -3,8 +3,9 @@ import { getSearchCriteria } from './formHandlers.js';
 import { createPopupContainer, removeExistingPopups, clearSearchResults, removePopup } from './popupUtils.js';
 import { clearFormFields, fillFormFields } from './formUtils.js';
 import { getGame } from './services.js';
+import { setFormMode } from './formHandlers.js';
 
-export function displaySearchResults(games) {
+export function displayMultiResultPopup(games) {
   removeExistingPopups();
 
   const popupContainer = createPopupContainer();
@@ -23,16 +24,14 @@ export function displaySearchResults(games) {
     const resultButton = document.createElement('button');
     resultButton.className = 'search-result-item';
 
-    // Create a container for the game details
     const gameDetails = document.createElement('div');
     gameDetails.className = 'game-details';
 
-    // Add the game image (if it exists)
     if (game.image) {
       const gameImage = document.createElement('img');
       gameImage.src = game.image;
       gameImage.alt = `${game.name} Image`;
-      gameImage.style.width = '50px'; // Set width to 50px
+      gameImage.style.width = '50px';
       gameImage.style.height = '50px';
       gameImage.style.objectFit = 'cover';
       gameDetails.appendChild(gameImage);
@@ -46,6 +45,7 @@ export function displaySearchResults(games) {
     resultButton.appendChild(gameDetails);
 
     resultButton.addEventListener('click', () => {
+      setFormMode('EDIT', game);
       populateFormFields(game);
       removePopup(popupContainer);
     });

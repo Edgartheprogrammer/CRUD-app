@@ -41,7 +41,8 @@ button {
         }
     }
 
-#editGameButton {
+#editGameButton,
+#searchButton {
         background-color: $color-secondary;
 
         &:hover {
@@ -92,7 +93,7 @@ button {
         }
     }
 
-#searchButton {
+#addSaveButton{
     background-color: $color-primary;
 
         &:hover {

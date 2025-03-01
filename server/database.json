@@ -4,31 +4,37 @@
       "id": "1",
       "name": "The Legend of Zelda: Breath of the Wild",
       "genre": "Action-adventure",
-      "platform": "nintendo",
       "release_date": "2017-03-03",
+      "platform": [
+        "playstation"
+      ],
       "price": 59.99,
-      "image": "./assets/images/image1.webp",
-      "sound": "https://example.com/botw-theme.mp3"
+      "image": "http://localhost:5500/assets/images/image1.webp"
     },
     {
       "id": "2",
       "name": "Super Mario Odyssey",
       "genre": "Platformer",
-      "platform": "nintendo",
       "release_date": "2017-10-27",
+      "platform": [
+        "nintendo",
+        "playstation",
+        "xbox"
+      ],
       "price": 59.99,
-      "image": "./assets/images/image2.webp",
-      "sound": "https://example.com/botw-theme.mp3"
+      "image": "http://localhost:5500/assets/images/image2.webp"
     },
     {
       "id": "3",
       "name": "The Witcher 3: Wild Hunt",
       "genre": "Action RPG",
-      "platform": "playstation, xbox, nintendo",
       "release_date": "2015-05-19",
+      "platform": [
+        "nintendo",
+        "xbox"
+      ],
       "price": 39.99,
-      "image": "./assets/images/image3.webp",
-      "sound": "https://example.com/botw-theme.mp3"
+      "image": "http://localhost:5500/assets/images/image3.webp"
     },
     {
       "name": "Red Dead Redemption 2",
@@ -39,6 +45,17 @@
       "image": "./assets/images/image4.webp",
       "sound": "https://example.com/botw-theme.mp3",
       "id": "4"
+    },
+    {
+      "id": "",
+      "name": "jjjj",
+      "genre": "Horror",
+      "release_date": "2025-03-01",
+      "platform": [
+        "nintendo"
+      ],
+      "price": 22,
+      "image": "http://localhost:5500/"
     }
   ]
 }

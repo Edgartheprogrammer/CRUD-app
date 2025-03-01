@@ -1,18 +1,24 @@
 // services.js
 
 /* ------------------------- ADD A GAME ------------------------- */
-export async function addGame(game) {
+export async function addGame(gameData) {
   try {
-    let response = await fetch('http://localhost:3000/video-games', {
+    const response = await fetch('http://localhost:3000/video-games', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(game),
+      body: JSON.stringify(gameData),
     });
+
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw new Error(errorResponse.message || 'Failed to add game');
+    }
+
     return await response.json();
   } catch (error) {
-    console.log('Error adding game', error);
+    console.error('Error adding game:', error);
     throw error;
   }
 }

@@ -7,6 +7,8 @@ import { FormModes } from './constants.js';
 
 export async function handleAddGameSave() {
   try {
+    console.log('Handling add game save...'); // Debugging
+
     const name = document.getElementById('Name').value;
     const genre = document.getElementById('Genre').value;
     const releaseDate = document.getElementById('ReleaseDate').value;
@@ -17,9 +19,11 @@ export async function handleAddGameSave() {
     }
 
     const gameData = getFormData();
+    console.log('Form data:', gameData); // Debugging
 
     const imageUpload = document.getElementById('ImageUpload');
     if (imageUpload.files.length > 0) {
+      console.log('Image upload detected...'); // Debugging
       const file = imageUpload.files[0];
       const formData = new FormData();
       formData.append('image', file);
@@ -35,6 +39,7 @@ export async function handleAddGameSave() {
         }
 
         const uploadResult = await uploadResponse.json();
+        console.log('Image upload result:', uploadResult); // Debugging
         gameData.image = uploadResult.imagePath;
       } catch (uploadError) {
         console.log('Error uploading image: ', uploadError);
@@ -42,13 +47,16 @@ export async function handleAddGameSave() {
       }
     }
 
+    console.log('Sending game data to backend...'); // Debugging
     const result = await addGame(gameData);
+    console.log('Backend response:', result); // Debugging
+
     showTransientMessage('Success', 'Game added successfully');
     clearFormFields();
     setFormMode(FormModes.INITIAL);
   } catch (error) {
     console.log('Error adding game: ', error);
-    showTransientMessage('Error', 'Failed to add game. ' + error.message);
+    showTransientMessage('Error', `Failed to add game. ${error.message || 'Unknown error'}`); // Include error details
   }
 }
 

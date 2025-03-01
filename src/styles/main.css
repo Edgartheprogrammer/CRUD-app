@@ -33,10 +33,12 @@ button#addButton:hover {
   background-color: #228b22;
 }
 
-#editGameButton {
+#editGameButton,
+#searchButton {
   background-color: #ff8c42;
 }
-#editGameButton:hover {
+#editGameButton:hover,
+#searchButton:hover {
   background-color: #cc7033;
 }
 
@@ -80,10 +82,10 @@ button#addButton:hover {
   background-color: #a9a9a9;
 }
 
-#searchButton {
+#addSaveButton {
   background-color: #6a5acd;
 }
-#searchButton:hover {
+#addSaveButton:hover {
   background-color: #483d8b;
 }
 
